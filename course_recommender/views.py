@@ -33,17 +33,22 @@ class AuthAPIView(APIView):
             return Response({"detail": "Please specify a username and password"}, status=401)
 
         qs = User.objects.filter(Q(Q(username__exact=username) | Q(email__exact=username)), is_active=True).distinct()
+        print(f'qs{qs}')
         if qs.count() == 1:
             user_obj = qs.first()
+            print(user_obj)
             user = None
             if user_obj.check_password(password):
                 user = user_obj
+                print(user)
 
             if user is not None:
                 payload = jwt_payload_handler(user)
+
                 token = jwt_encode_handler(payload)
                 response = jwt_response_payload_handler(token, user, request=request)
                 if response is not None:
+                    print(f'response{response}')
                     return Response(response, status=200)
                 return Response({"detail": "Invalid login details"}, status=401)
         return Response({"detail": "Invalid login details"}, status=401)
