@@ -14,13 +14,6 @@ class UserSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
         read_only_fields = ['id']
 
-    # def validate_email(self, value):
-    #     if not self.context.get('is_update', False):
-    #         qs = User.objects.filter(email__exact=value)
-    #         if qs.exists():
-    #             raise serializers.ValidationError("User with this email already exists")
-    #     return value
-
     def validate_password(self, value):
         if len(value) < 6:
             raise serializers.ValidationError("Password should be minimum 6 characters long")
@@ -97,7 +90,7 @@ class StudentSerializer(serializers.ModelSerializer):
             'state',
             'zip_code',
             'country',
-            # 'avatar',
+            'avatar',
             'created_at',
             'updated_at',
         ]
