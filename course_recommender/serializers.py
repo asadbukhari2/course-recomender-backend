@@ -97,7 +97,7 @@ class StudentSerializer(serializers.ModelSerializer):
             'state',
             'zip_code',
             'country',
-            # 'avatar',
+            'avatar',
             'created_at',
             'updated_at',
         ]

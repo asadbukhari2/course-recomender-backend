@@ -15,7 +15,7 @@ class Student(models.Model):
     state = models.CharField(max_length=100, null=True, blank=True)
     zip_code = models.CharField(max_length=100, blank=True, null=True)
     country = models.CharField(max_length=100, blank=True, null=True)
-    # avatar = models.FileField(upload_to=upload_profile_avatar, null=True, blank=True)
+    avatar = models.ImageField(upload_to='cars', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -66,6 +66,8 @@ class Course(models.Model):
     difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     study_mode = models.ForeignKey(StudyMode, on_delete=models.CASCADE)
     name = models.CharField(max_length=250, blank=True, null=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
+    drive_link = models.URLField(max_length=250, blank=True, null=True)
     rating = models.DecimalField(max_digits=19, decimal_places=10, null=True, blank=True)
     price = models.DecimalField(max_digits=19, decimal_places=10, null=True, blank=True)
     credit_hours = models.IntegerField(blank=True, null=True)
